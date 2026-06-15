@@ -1,6 +1,7 @@
 # Ops-Automations
 CloudWatch 每日錯誤分流 → OPRA 開單
 
+```mermaid
 flowchart TD
     cron["排程觸發：每天 09:00 (台北時區)"] --> agent["Cursor Cloud Agent 啟動<br/>GitHub 載體 repo + Secrets 注入<br/>(不使用 MCP，純打 API)"]
     agent --> query["查 CloudWatch Logs Insights<br/>過去 24h，filter error/exception/traceback<br/>/aws/lambda/opra-taylew-api-prod<br/>/ecs/opra-taylew-worker-prod"]
@@ -17,3 +18,4 @@ flowchart TD
     notify --> mailYitsao["yitsao（watcher / 留言）"]
     mailDakin --> summary["輸出本次摘要<br/>新開/補留言張數 + 單號"]
     mailYitsao --> summary
+```
